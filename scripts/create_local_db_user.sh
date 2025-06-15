@@ -2,7 +2,7 @@
 set -x
 
 DB_NAME='nestjs_graphql_edge_api'
-DB_USER='postgres_dw'
+DB_USER='postgres'
 DB_PASS='postgres'
 
 if id "postgres" >/dev/null 2>&1; then
