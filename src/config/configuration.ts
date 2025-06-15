@@ -6,8 +6,9 @@ export default (): AppConfiguration => {
   const port = parseInt(process.env.PORT ?? '3000', 10);
 
   const rabbitmq = {
-    url: process.env.RABBITMQ_URL ?? 'amqp://user:pass@localhost:5672',
+    url: process.env.RABBITMQ_URL ?? 'amqp://guest:guest@localhost:5672',
     queue: process.env.RABBITMQ_QUEUE ?? 'edge_events',
+    cookie: process.env.RABBITMQ_ERLANG_COOKIE ?? "supersecretcookievalue123"
   };
 
   const playground: boolean = process.env.GRAPHQL_PLAYGROUND === true;

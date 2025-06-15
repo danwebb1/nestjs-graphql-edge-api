@@ -8,6 +8,7 @@ declare namespace NodeJS {
     DB_NAME: string;
     RABBITMQ_URL: string;
     RABBITMQ_QUEUE: string;
+    RABBITMQ_ERLANG_COOKIE: string;
     GRAPHQL_PLAYGROUND: boolean;
     GRAPHQL_INTROSPECTION: boolean;
     BASE_PATH: string;
