@@ -8,6 +8,7 @@ export default (): AppConfiguration => {
   const rabbitmq = {
     url: process.env.RABBITMQ_URL ?? 'amqp://guest:guest@localhost:5672',
     queue: process.env.RABBITMQ_QUEUE ?? 'edge_events',
+    // If you have issues connecting to rabbitMQ on Docker and get cookie errors just use this
     cookie: process.env.RABBITMQ_ERLANG_COOKIE ?? "supersecretcookievalue123"
   };
 
