@@ -8,6 +8,8 @@ import { Edge } from './edge/edge.entity';
 import { EdgeModule } from './edge/edge.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver } from '@nestjs/apollo';
+import { EdgeEventsController } from './edge/edge.events.controller';
+import {RabbitMQClientModule} from "./rabbitmq-client/rabbitmq-client.module";
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { ApolloDriver } from '@nestjs/apollo';
         }),
       ],
     }),
+    RabbitMQClientModule,
   ],
+  controllers: [EdgeEventsController],
 })
 export class AppModule {}

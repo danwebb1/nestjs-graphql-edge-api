@@ -24,6 +24,7 @@ export class EdgeService {
 
   async create(input: CreateEdgeInput): Promise<Edge> {
     try {
+      console.log(input);
       const edge = this.edgeRepo.create(input);
       const saved = await this.edgeRepo.save(edge);
       try {
