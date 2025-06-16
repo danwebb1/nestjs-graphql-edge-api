@@ -11,7 +11,6 @@ import {
   Field,
   ID,
   Int,
-  GraphQLISODateTime,
 } from '@nestjs/graphql';
 
 @Entity({ name: 'edges' })
@@ -22,12 +21,12 @@ export class Edge {
   @Field(() => ID)
   id: string;
 
-  @CreateDateColumn()
-  @Field(() => GraphQLISODateTime)
+@CreateDateColumn()
+  @Field()
   created_at: Date;
 
   @UpdateDateColumn()
-  @Field(() => GraphQLISODateTime)
+  @Field()
   updated_at: Date;
 
   @Column({ type: 'int' })

@@ -3,6 +3,7 @@ import { Edge } from './edge.entity';
 import { EdgeService } from './edge.service';
 import { CreateEdgeInput } from './dto/create.input';
 import { ParseUUIDPipe } from '@nestjs/common';
+import {UpdateEdgeInput} from "./dto/update.input";
 
 @Resolver(() => Edge)
 export class EdgeResolver {
@@ -21,5 +22,13 @@ export class EdgeResolver {
   @Mutation(() => Edge)
   createEdge(@Args('input') input: CreateEdgeInput) {
     return this.edgeService.create(input);
+  }
+
+  @Mutation(() => Edge)
+  updateEdge(
+    @Args('id', { type: () => ID }, new ParseUUIDPipe()) id: string,
+    @Args('input') input: UpdateEdgeInput,
+  ) {
+    return this.edgeService.update(id, input);
   }
 }

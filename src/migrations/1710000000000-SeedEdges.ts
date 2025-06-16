@@ -1,10 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
-import { v4 } from 'uuid';
-
-const uuid4 = v4();
 export class CreateAndSeedEdges1710000000000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // Create the 'edges' table
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
     await queryRunner.createTable(
       new Table({
         name: 'edges',
@@ -14,7 +11,7 @@ export class CreateAndSeedEdges1710000000000 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
-            default: `'${uuid4}'`,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'created_at',
@@ -28,7 +25,7 @@ export class CreateAndSeedEdges1710000000000 implements MigrationInterface {
           },
           {
             name: 'capacity',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'node1_alias',
@@ -46,14 +43,13 @@ export class CreateAndSeedEdges1710000000000 implements MigrationInterface {
     for (let i = 0; i < 10; i++) {
       const node1 = `Node1-${i}`;
       const node2 = `Node2-${i}`;
-      const id = v4();
       const capacity = Math.floor(
         Math.random() * (1_000_000 - 10_000 + 1) + 10_000,
       ).toString();
       await queryRunner.query(
-        `INSERT INTO edges (id, created_at, updated_at, capacity, node1_alias, node2_alias)
-         VALUES ($1, NOW(), NOW(), $2, $3, $4)`,
-        [id, capacity, node1, node2],
+        `INSERT INTO edges (created_at, updated_at, capacity, node1_alias, node2_alias)
+         VALUES (NOW(), NOW(), $1, $2, $3)`,
+        [capacity, node1, node2],
       );
     }
   }

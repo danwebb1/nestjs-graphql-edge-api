@@ -12,12 +12,11 @@ async function bootstrap() {
       urls: [process.env.RABBITMQ_URL || 'amqp://guest:guest@localhost:5672'],
       queue: process.env.RABBITMQ_QUEUE || 'edge_events',
       queueOptions: { durable: true },
-      noAck: false,
     },
   });
 
   await app.startAllMicroservices();
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
   console.log(`Server ready at http://localhost:3000/graphql`);
 }
 bootstrap();
